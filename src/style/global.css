@@ -1,12 +1,3 @@
-#bar {
-  width: 100%;
-  height: 1.5rem;
-
-  padding: 15px 0;
-
-  margin: 1rem 0;
-}
-
 #root {
   max-width: 620px;
   max-height: 500px;
@@ -32,11 +23,3 @@ li {
   margin: 0;
   list-style: none;
 }
-
-.result {
-  color: rgb(0, 127, 255);
-  background-color: white;
-}
-
-
-/*# sourceMappingURL=/src.a2b27638.css.map */

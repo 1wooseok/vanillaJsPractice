@@ -1,4 +1,5 @@
 import "../style/progressBar.module.css";
+import MAX_QUIZ_LENGTH from "../utils/constant.js";
 
 export default function ProgressBar({ target, initialState }) {
   this.element = document.createElement("div");
@@ -7,7 +8,8 @@ export default function ProgressBar({ target, initialState }) {
   target.appendChild(this.element);
 
   this.state = {
-    index: initialState
+    step: initialState.step,
+    showResult: initialState.showResult,
   };
 
   this.setState = (newState) => {
@@ -20,9 +22,15 @@ export default function ProgressBar({ target, initialState }) {
 
   this.render = () => {
     const RATIO = 10;
-    const { index } = this.state;
+    const { step, showResult } = this.state;
+
+    if (showResult) {
+      this.element.innerHTML = ``;
+      return;
+    }
+
     this.element.innerHTML = `
-      <progress max="100" value="${index * RATIO}" id="bar">${this.state.index}</progress>
+      <progress max="${MAX_QUIZ_LENGTH * RATIO}" value="${step * RATIO}" id="bar">${this.state.step}</progress>
     `
   }
 

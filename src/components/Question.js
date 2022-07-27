@@ -1,10 +1,16 @@
-export default function Question({ target, initialState, QnA, onClick }) {
-  this.element = document.createElement("div");
+import MAX_QUIZ_LENGTH from "../utils/constant.js";
+
+export default function Question({ target, initialState, onClick }) {
+  this.element = document.createElement("ul");
   this.element.classList.add("question__wrap");
 
   target.appendChild(this.element);
 
-  this.state = { index: initialState };
+  this.state = {
+    step: initialState.step,
+    data: initialState.data,
+    showResult: initialState.showResult,
+  };
 
   this.setState = (newState) => {
     this.state = {
@@ -13,19 +19,51 @@ export default function Question({ target, initialState, QnA, onClick }) {
     }
     this.render();
   }
+
   this.render = () => {
+    const { step, data, showResult } = this.state;
+
+    if (showResult) {
+      this.element.innerHTML = ``;
+      return;
+    }
+
+    if (step === MAX_QUIZ_LENGTH) {
+      return;
+    }
+
+    if (data.length === 0) {
+      this.element.innerHTML = `<div>Loading...</div>`;
+      return;
+    }
+
+    const { q, a } = data[step];
+
     this.element.innerHTML = `
-      <div class="tilte">1. Lorem ipsum ...</div>
-      <div class="answer">a. I like Apple</div>
-      <div class="answer">b. I hate Apple</div>
-      <div class="answer">c. I loveeee Apple</div>
+      <li class="tilte">${q}</li>
+      ${a.map((info, idx) => `
+        <li class="answer" data-idx="${idx}">
+          ${info.answer}
+        </li>`)
+        .join('')}
     `
   }
 
   this.render();
 
   this.element.addEventListener("click", (e) => {
-    const { index } = this.state;
-    onClick(index + 1);
+    if (e.target.classList.contains("answer")) {
+      const { step, data } = this.state;
+
+      if (step === MAX_QUIZ_LENGTH) {
+        return;
+      }
+
+      const { a } = data[step];
+      const idx = e.target.dataset.idx;
+      const { type } = a[idx]
+
+      onClick(step + 1, type);
+    }
   })
 }
