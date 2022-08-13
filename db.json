@@ -102,46 +102,7 @@
   ],
   "post": [
     {
-      "id": 1,
-      "avatar": "http://asstes/images/userAvatar",
-      "userName": "석우정",
-      "date": "2022-08-05",
-      "title": "15 - 17시 풋살할분~~!",
-      "content": "ㅈㄱㄴ",
-      "images": [
-        "http://asstes/images/post/1"
-      ],
-      "comments": [
-        {
-          "postId": 1,
-          "commentId": 1,
-          "avatar": "http://asstes/images/userAvatar",
-          "usreName": "따오기",
-          "writeDate": "2022-08-13",
-          "childComments": [
-            {
-              "childCommentId": 1,
-              "postId": 1,
-              "commentId": 1,
-              "avatar": "http://asstes/images/userAvatar",
-              "usreName": "구르미",
-              "writeDate": "2022-08-13",
-              "content": "답글의 답글1"
-            },
-            {
-              "childCommentId": 1,
-              "postId": 1,
-              "commentId": 1,
-              "avatar": "http://asstes/images/userAvatar",
-              "usreName": "구르미",
-              "writeDate": "2022-08-13",
-              "content": "답글의 답글1"
-            }
-          ]
-        }
-      ],
-      "category": "풋살",
-      "viewCount": 23
+      "id": 1
     },
     {
       "id": 2,
@@ -150,26 +111,27 @@
       "date": "2022-08-05",
       "title": "25 - 27시 풋살할분~~!",
       "content": "ㅈㄱㄴ",
+      "category": "풋살",
+      "viewCount": 15,
       "images": [
         "http://asstes/images/post/2"
       ],
-      "category": "풋살",
-      "viewCount": 15,
       "comments": [
         {
           "postId": 2,
           "commentId": 1,
           "avatar": "http://asstes/images/userAvatar",
-          "usreName": "따오기",
-          "writeDate": "2022-08-23",
+          "userName": "따오기",
+          "date": "2022-08-23",
+          "content": "저요",
           "childComments": [
             {
               "childCommentId": 1,
               "postId": 2,
               "commentId": 1,
               "avatar": "http://asstes/images/userAvatar",
-              "usreName": "구르미",
-              "writeDate": "2022-08-23",
+              "userName": "구르미",
+              "date": "2022-08-23",
               "content": "답글의 답글2"
             }
           ]
@@ -178,8 +140,8 @@
           "postId": 2,
           "commentId": 2,
           "avatar": "http://asstes/images/userAvatar",
-          "usreName": "두뇌회전이",
-          "writeDate": "2022-08-23",
+          "userName": "두뇌회전이",
+          "date": "2022-08-23",
           "childComments": []
         }
       ]
@@ -193,6 +155,8 @@
       "date": "2022-08-05",
       "title": "15 - 17시 풋살할분~~!",
       "content": "ㅈㄱㄴ",
+      "category": "풋살",
+      "viewCount": 23,
       "images": [
         "http://asstes/images/post/1"
       ],
@@ -201,16 +165,17 @@
           "postId": 1,
           "commentId": 1,
           "avatar": "http://asstes/images/userAvatar",
-          "usreName": "따오기",
-          "writeDate": "2022-08-13",
+          "userName": "따오기",
+          "date": "2022-08-13",
+          "content": "아 저요",
           "childComments": [
             {
               "childCommentId": 1,
               "postId": 1,
               "commentId": 1,
               "avatar": "http://asstes/images/userAvatar",
-              "usreName": "구르미",
-              "writeDate": "2022-08-13",
+              "userName": "구르미",
+              "date": "2022-08-13",
               "content": "답글의 답글1"
             },
             {
@@ -218,54 +183,11 @@
               "postId": 1,
               "commentId": 1,
               "avatar": "http://asstes/images/userAvatar",
-              "usreName": "구르미",
-              "writeDate": "2022-08-13",
+              "userName": "구르미",
+              "date": "2022-08-13",
               "content": "답글의 답글1"
             }
           ]
-        }
-      ],
-      "category": "풋살",
-      "viewCount": 23
-    },
-    {
-      "id": 2,
-      "avatar": "http://asstes/images/userAvatar",
-      "userName": "석우정",
-      "date": "2022-08-05",
-      "title": "25 - 27시 풋살할분~~!",
-      "content": "ㅈㄱㄴ",
-      "images": [
-        "http://asstes/images/post/2"
-      ],
-      "category": "풋살",
-      "viewCount": 15,
-      "comments": [
-        {
-          "postId": 2,
-          "commentId": 1,
-          "avatar": "http://asstes/images/userAvatar",
-          "usreName": "따오기",
-          "writeDate": "2022-08-23",
-          "childComments": [
-            {
-              "childCommentId": 1,
-              "postId": 2,
-              "commentId": 1,
-              "avatar": "http://asstes/images/userAvatar",
-              "usreName": "구르미",
-              "writeDate": "2022-08-23",
-              "content": "답글의 답글2"
-            }
-          ]
-        },
-        {
-          "postId": 2,
-          "commentId": 2,
-          "avatar": "http://asstes/images/userAvatar",
-          "usreName": "두뇌회전이",
-          "writeDate": "2022-08-23",
-          "childComments": []
         }
       ]
     }
