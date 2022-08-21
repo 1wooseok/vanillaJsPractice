@@ -1,0 +1,3 @@
+{
+  "/post/:postId": "/item/:postId"
+}
