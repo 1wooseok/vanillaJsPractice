@@ -1,33 +1,13 @@
 import { A, B, C, D, Modal } from "./components/index.js";
 
 export default function App({ target }) {
-  this.state = {
-    children: null,
-  }
+  const a = new A({ target });
 
-  this.setState = (newState) => {
-    this.state = { ...this.state, ...newState };
-  }
+  const b = new B({ target });
 
-  const a = new A({
-    target,
-    onToggle: () => this.onToggle(),
-  });
+  const c = new C({ target });
 
-  const b = new B({
-    target,
-    onToggle: () => this.onToggle(),
-  });
-
-  const c = new C({
-    target,
-    onToggle: () => this.onToggle(),
-  });
-
-  const d = new D({
-    target,
-    onToggle: () => this.onToggle(),
-  });
+  const d = new D({ target });
 
   const modal = new Modal({
     target,

@@ -1,20 +1,15 @@
 import store from "../store/store.js";
 
-export default function Modal({ target, props }) {
-  let show = store.getStore("modal");
-
+export default function Modal({ target }) {
   const div = document.createElement('div');
   this.div = div;
   this.div.classList.add('modal-container');
 
   target.appendChild(this.div);
 
-  this.setState = () => {
-    show = store.getStore("modal");
-    this.render();
-  }
-
   this.render = () => {
+    const show = store.getStore("modal");
+
     if (show) {
       this.div.innerHTML = `
       <div class="modal-bg"></div>
@@ -41,5 +36,5 @@ export default function Modal({ target, props }) {
     }
   });
 
-  store.subscribe(this.setState);
+  store.subscribe(this.render);
 }
