@@ -1,6 +1,11 @@
 import { initialState, reducer } from "./reducer.js";
 
 function Store(initialState, reducer) {
+  let singleton = this;
+  Store = function () {
+    return singleton;
+  }
+
   let state = initialState;
   let subscribers = new Set();
 
@@ -32,24 +37,24 @@ function Store(initialState, reducer) {
       throw new Error("Only setState function can subscribe to store");
     };
     subscribers.add(setStateFn);
-  };
+  },
 
-  // 외부에서 사용만 가능하고 바꾸지 못하게 해야함.
-  this.getState = (key) => {
-    if (key) {
-      return state[key];
-    }
-    return state;
-  };
+    // 외부에서 사용만 가능하고 바꾸지 못하게 해야함.
+    this.getState = (key) => {
+      if (key) {
+        return state[key];
+      }
+      return state;
+    },
 
-  // 외부에서 사용만 가능하고 바꾸지 못하게 해야함.
-  this.dispatch = (action = { type: null, payload: null }) => {
-    if (!action.type) {
-      throw new Error(`"type" attr required`);
+    // 외부에서 사용만 가능하고 바꾸지 못하게 해야함.
+    this.dispatch = (action = { type: null, payload: null }) => {
+      if (!action.type) {
+        throw new Error(`"type" attr required`);
+      }
+      const newState = reducer(action, state);
+      setState(newState);
     }
-    const newState = reducer(action, state);
-    setState(newState);
-  }
 }
 
 export const store = new Store(initialState, reducer);
