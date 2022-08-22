@@ -1,4 +1,4 @@
-import store from "../store/store.js";
+import { store } from "../store/store.js";
 
 export default function Modal({ target }) {
   const div = document.createElement('div');

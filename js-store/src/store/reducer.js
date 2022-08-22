@@ -3,8 +3,15 @@
  * @param { object: { type: string, payload: any }} action 
  * @param { object } state 
  */
-// setState가 애매해짐.
-export default function reducer(action, state) {
+
+export const initialState = {
+  modal: {
+    show: false,
+    children: null
+  },
+};
+
+export function reducer(action, state) {
   const { type, payload } = action;
 
   switch (type) {

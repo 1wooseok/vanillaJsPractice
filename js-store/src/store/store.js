@@ -1,4 +1,4 @@
-import reducer from "./reducer.js";
+import { initialState, reducer } from "./reducer.js";
 
 function Store(initialState, reducer) {
   let state = initialState;
@@ -52,15 +52,4 @@ function Store(initialState, reducer) {
   }
 }
 
-const initialState = {
-  modal: {
-    show: false,
-    children: null
-  },
-};
-
-const store = new Store(initialState, reducer);
-
-export default store;
-
-
+export const store = new Store(initialState, reducer);
