@@ -14,3 +14,9 @@ export default function App({ target }) {
     props: this.state,
   })
 }
+
+class MyPromise {
+  constructor(resolve, reject) {
+
+  }
+}
