@@ -1,125 +1,66 @@
-// interface MyStore {
-//   state: object;
-//   getStore: (key: string) => any,
-//   setStore: (newState) => void;
-//   dispatch: (action: { type: string, payload?: any }): void;
-//   subscribe: (fn:() => void) => void;
-//   publish: () => void;
-// }
-// const store = (function () {
-//   let subscribers = [];
-//   let globalState = {
-//     modal: false,
-//   };
+import reducer from "./reducer.js";
 
-//   return {
-//     getStore: (key) => {
-//       if (globalState[key] === undefined) {
-//         throw new Error(`${key} : Invalid state`);
-//       }
-//       return globalState[key];
-//     },
+function Store(initialState, reducer) {
+  let state = initialState;
+  let subscribers = new Set();
 
-//     setStore: (newState) => {
-//       const keys = Object.keys(newState);
-
-//       if (keys.length > 1) {
-//         throw new Error("'setStore' method can add 1 state at a time");
-//       }
-//       if (typeof keys[0] !== "string") {
-//         throw new Error("'state key' must be a string");
-//       }
-
-//       globalState = { ...globalState, ...newState };
-//     },
-
-//     dispatch: (action = { type: null, payload: null }) => {
-//       const { type, payload } = action;
-
-//       switch (type) {
-//         case "TOGGLE-MODAL":
-//           this.setStore({ ...state, modal: !globalState.modal });
-//           break;
-//         default:
-//           throw new Error(`${type} : Invalid action Type`);
-//       };
-
-//       this.pusblish();
-//     },
-
-//     subscribe: (setStateFn) => {
-//       if (typeof setStateFn !== "function") {
-//         throw new Error("Only setState function can subscribe to store");
-//       };
-//       subscribers.push(setStateFn);
-//     },
-
-//     publish: () => {
-//       if (subscribers.length === 0) {
-//         return;
-//       }
-//       subscribers.forEach(setStateFn => {
-//         setStateFn(globalState);
-//       })
-//     },
-//   }
-// })();
-
-// ex) 모달 on/off같이 모든 컴포넌트에서 사용 하는 상태는
-// props로 주는 대신, store에서 꺼내서 써보기
-
-function Store() {
-  let subscribers = [];
-  let globalState = {
-    modal: false,
+  const notify = () => {
+    if (subscribers.size === 0) {
+      return;
+    }
+    subscribers.forEach(setStateFn => {
+      setStateFn(state);
+    })
   };
 
+  const setState = (newState) => {
+    // 비교가 정확한지 모르겟음.
+    if (state === newState) { // 원시타입
+      return;
+    }
+    if (JSON.stringify(state) === JSON.stringify(newState)) { // 참조타입
+      return;
+    }
+
+    state = { ...state, ...newState };
+    notify();
+  };
+
+  // 외부에서 사용만 가능하고 바꾸지 못하게 해야함.
   this.subscribe = (setStateFn) => {
     if (typeof setStateFn !== "function") {
       throw new Error("Only setState function can subscribe to store");
     };
-    subscribers.push(setStateFn);
+    subscribers.add(setStateFn);
   };
 
-  this.publish = () => {
-    if (subscribers.length === 0) {
-      return;
+  // 외부에서 사용만 가능하고 바꾸지 못하게 해야함.
+  this.getState = (key) => {
+    if (key) {
+      return state[key];
     }
-    subscribers.forEach(setStateFn => {
-      setStateFn(globalState);
-    })
+    return state;
   };
 
-  this.getStore = (key) => {
-    if (globalState[key] === undefined) {
-      throw new Error(`${key} : Invalid state`);
-    }
-    return globalState[key];
-  };
-
-  this.setStore = (newState) => {
-    const keys = Object.keys(newState);
-
-    if (!keys.every(key => typeof key === 'string')) {
-      throw new Error("key must be string");
-    }
-    globalState = { ...globalState, ...newState };
-    this.publish();
-  };
-
+  // 외부에서 사용만 가능하고 바꾸지 못하게 해야함.
   this.dispatch = (action = { type: null, payload: null }) => {
-    const { type, payload } = action;
-
-    switch (type) {
-      case "TOGGLE-MODAL":
-        this.setStore({ ...globalState, modal: !globalState.modal });
-        break;
-      default:
-        throw new Error(`${type} : Invalid action Type`);
-    };
-  };
+    if (!action.type) {
+      throw new Error(`"type" attr required`);
+    }
+    const newState = reducer(action, state);
+    setState(newState);
+  }
 }
 
-const store = new Store();
+const initialState = {
+  modal: {
+    show: false,
+    children: null
+  },
+};
+
+const store = new Store(initialState, reducer);
 
 export default store;
+
+

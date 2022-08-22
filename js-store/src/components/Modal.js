@@ -1,30 +1,26 @@
 import store from "../store/store.js";
 
-export default function Modal({ target, props }) {
-  let show = store.getStore("modal");
-
+export default function Modal({ target }) {
   const div = document.createElement('div');
   this.div = div;
   this.div.classList.add('modal-container');
 
   target.appendChild(this.div);
 
-  this.setState = () => {
-    show = store.getStore("modal");
-    this.render();
-  }
-
   this.render = () => {
+    const { show, children } = store.getState('modal');
+
     if (show) {
       this.div.innerHTML = `
       <div class="modal-bg"></div>
       <div class="modal-box">
-      <div class="modal-header">
-      <button class="close">×</button>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer"></div>
+        <div class="modal-header">
+          <button class="close">×</button>
+        </div>
+        <div class="modal-body">
+          ${children ? children : ''}
+        </div>
+        <div class="modal-footer"></div>
       </div>
       `;
 
@@ -34,12 +30,12 @@ export default function Modal({ target, props }) {
     }
   }
 
+  store.subscribe(this.render);
+
   this.div.addEventListener('click', e => {
     const seletor = e.target.classList;
     if (seletor.contains('modal-bg') || seletor.contains('close')) {
       store.dispatch({ type: 'TOGGLE-MODAL' });
     }
   });
-
-  store.subscribe(this.setState);
 }

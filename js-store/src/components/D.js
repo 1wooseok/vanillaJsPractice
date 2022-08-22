@@ -16,6 +16,8 @@ export default function D({ target }) {
   target.appendChild(div);
 
   this.button.addEventListener('click', () => {
-    store.dispatch({ type: "TOGGLE-MODAL" });
+    const modalContent = `<p>자식 컴포넌트</p>`;
+
+    store.dispatch({ type: "TOGGLE-MODAL", payload: modalContent });
   });
 }
